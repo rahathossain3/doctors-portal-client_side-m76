@@ -3,6 +3,7 @@ import fluoride from '../../assets/images/fluoride.png';
 import cavity from '../../assets/images/cavity.png';
 import whitening from '../../assets/images/whitening.png';
 import Service from './Service';
+import ServiceBanner from './ServiceBanner';
 
 const Services = () => {
 
@@ -41,6 +42,9 @@ const Services = () => {
                         service={service}
                     ></Service>)
                 }
+            </div>
+            <div className='mt-20'>
+                <ServiceBanner></ServiceBanner>
             </div>
         </div>
     );
