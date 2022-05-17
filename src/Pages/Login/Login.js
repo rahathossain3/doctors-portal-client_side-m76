@@ -37,6 +37,12 @@ const Login = () => {
                                 type="email"
                                 placeholder="Your Email"
                                 class="input input-bordered w-full max-w-xs"
+                                {...register("email", {
+                                    pattern: {
+                                        value: /[A-Za-z]{3}/,
+                                        message: 'error message'
+                                    }
+                                })}
                             />
                             <label class="label">
                                 <span class="label-text-alt">Alt label</span>
