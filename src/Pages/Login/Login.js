@@ -28,11 +28,16 @@ const Login = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
 
                         {/* daisy ui ----------------- */}
+
+
+                        {/* email field ------------------------------- */}
                         <div class="form-control w-full max-w-xs">
                             <label class="label">
                                 <span class="label-text">Email</span>
 
                             </label>
+
+                            {/* email field ------------------------------- */}
                             <input
                                 type="email"
                                 placeholder="Your Email"
@@ -45,13 +50,49 @@ const Login = () => {
                                         message: 'Email is Required'
                                     },
                                     pattern: {
+                                        // email validating regular expression
                                         value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
                                         message: 'Provide a valid Email'
                                     }
                                 })}
                             />
                             <label class="label">
-                                <span class="label-text-alt">Alt label</span>
+                                {/* if get error */}
+                                {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
+                                {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
+                            </label>
+                        </div>
+
+                        {/* Password field ------------------------------- */}
+                        <div class="form-control w-full max-w-xs">
+                            <label class="label">
+                                <span class="label-text">Password</span>
+
+                            </label>
+
+                            {/* Password field ------------------------------- */}
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                class="input input-bordered w-full max-w-xs"
+
+                                // verification 
+                                {...register("password", {
+                                    required: {
+                                        value: true,
+                                        message: 'Password is Required'
+                                    },
+                                    minLength: {
+                                        // Password validating regular expression
+                                        value: 6,
+                                        message: 'Must be 6 character or longer'
+                                    }
+                                })}
+                            />
+                            <label class="label">
+                                {/* if get error */}
+                                {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
+                                {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
 
                             </label>
                         </div>
@@ -59,13 +100,8 @@ const Login = () => {
 
                         {/* form hook ------------ */}
 
-                        <input {...register("firstName", { required: true })} />
-                        {errors.firstName?.type === 'required' && "First name is required"}
 
-                        <input {...register("lastName", { required: true })} />
-                        {errors.lastName && "Last name is required"}
-
-                        <input type="submit" />
+                        <input className='btn w-full max-w-xs text' type="submit" value="Login" />
                     </form>
 
                     <div className="divider">OR</div>
