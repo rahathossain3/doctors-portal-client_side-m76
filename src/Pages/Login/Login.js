@@ -37,10 +37,16 @@ const Login = () => {
                                 type="email"
                                 placeholder="Your Email"
                                 class="input input-bordered w-full max-w-xs"
+
+                                // verification 
                                 {...register("email", {
+                                    required: {
+                                        value: true,
+                                        message: 'Email is Required'
+                                    },
                                     pattern: {
-                                        value: /[A-Za-z]{3}/,
-                                        message: 'error message'
+                                        value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                                        message: 'Provide a valid Email'
                                     }
                                 })}
                             />
