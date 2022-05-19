@@ -4,7 +4,7 @@ import auth from '../../firebase.init';
 //react hook from
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     //google signing
@@ -21,7 +21,14 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    // for error
     let signInError;
+
+    //for redirect location page
+    let navigate = useNavigate();
+    let location = useLocation();
+
+    let from = location.state?.from?.pathname || "/";
 
     //ifLoading 
     // if (true || loading || gLoading) { // make short certes 
@@ -35,6 +42,7 @@ const Login = () => {
     }
 
     if (user || gUser) {
+        navigate(from, { replace: true });
         console.log(user || gUser);
     }
 
