@@ -66,9 +66,9 @@ const SignUp = () => {
 
 
                         {/* name field ------------------------------- */}
-                        <div class="form-control w-full max-w-xs">
-                            <label class="label">
-                                <span class="label-text">Name</span>
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Name</span>
 
                             </label>
 
@@ -76,7 +76,7 @@ const SignUp = () => {
                             <input
                                 type="text"
                                 placeholder="Your Name"
-                                class="input input-bordered w-full max-w-xs"
+                                className="input input-bordered w-full max-w-xs"
 
                                 // verification 
                                 {...register("name", {
@@ -86,7 +86,7 @@ const SignUp = () => {
                                     }
                                 })}
                             />
-                            <label class="label">
+                            <label className="label">
                                 {/* if get error */}
                                 {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
 
@@ -94,9 +94,9 @@ const SignUp = () => {
                         </div>
 
                         {/* email field ------------------------------- */}
-                        <div class="form-control w-full max-w-xs">
-                            <label class="label">
-                                <span class="label-text">Name</span>
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Name</span>
 
                             </label>
 
@@ -104,7 +104,7 @@ const SignUp = () => {
                             <input
                                 type="email"
                                 placeholder="Your Email"
-                                class="input input-bordered w-full max-w-xs"
+                                className="input input-bordered w-full max-w-xs"
 
                                 // verification 
                                 {...register("email", {
@@ -119,7 +119,7 @@ const SignUp = () => {
                                     }
                                 })}
                             />
-                            <label class="label">
+                            <label className="label">
                                 {/* if get error */}
                                 {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                                 {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
@@ -127,9 +127,9 @@ const SignUp = () => {
                         </div>
 
                         {/* Password field ------------------------------- */}
-                        <div class="form-control w-full max-w-xs">
-                            <label class="label">
-                                <span class="label-text">Password</span>
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Password</span>
 
                             </label>
 
@@ -137,7 +137,7 @@ const SignUp = () => {
                             <input
                                 type="password"
                                 placeholder="Password"
-                                class="input input-bordered w-full max-w-xs"
+                                className="input input-bordered w-full max-w-xs"
 
                                 // verification 
                                 {...register("password", {
@@ -152,7 +152,7 @@ const SignUp = () => {
                                     }
                                 })}
                             />
-                            <label class="label">
+                            <label className="label">
                                 {/* if get error */}
                                 {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
                                 {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}

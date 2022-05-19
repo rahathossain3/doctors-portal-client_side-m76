@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 //react hook from
@@ -30,10 +30,16 @@ const Login = () => {
 
     let from = location.state?.from?.pathname || "/";
 
+    useEffect(() => {
+        if (user || gUser) {
+            navigate(from, { replace: true });
+            // console.log(user || gUser);
+        }
+    }, [user, gUser, from, navigate])
+
     //ifLoading 
     // if (true || loading || gLoading) { // make short certes 
     if (loading || gLoading) {
-
         return <Loading></Loading>
     }
 
@@ -41,14 +47,11 @@ const Login = () => {
         signInError = <p className='text-red-500'><small>{error?.message || gError?.message}</small></p>
     }
 
-    if (user || gUser) {
-        navigate(from, { replace: true });
-        console.log(user || gUser);
-    }
+
 
     //handle submit form
     const onSubmit = data => {
-        console.log(data);
+        // console.log(data);
         signInWithEmailAndPassword(data.email, data.password)
     }
 
@@ -64,9 +67,9 @@ const Login = () => {
 
 
                         {/* email field ------------------------------- */}
-                        <div class="form-control w-full max-w-xs">
-                            <label class="label">
-                                <span class="label-text">Email</span>
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Email</span>
 
                             </label>
 
@@ -74,7 +77,7 @@ const Login = () => {
                             <input
                                 type="email"
                                 placeholder="Your Email"
-                                class="input input-bordered w-full max-w-xs"
+                                className="input input-bordered w-full max-w-xs"
 
                                 // verification 
                                 {...register("email", {
@@ -89,7 +92,7 @@ const Login = () => {
                                     }
                                 })}
                             />
-                            <label class="label">
+                            <label className="label">
                                 {/* if get error */}
                                 {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                                 {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
@@ -97,9 +100,9 @@ const Login = () => {
                         </div>
 
                         {/* Password field ------------------------------- */}
-                        <div class="form-control w-full max-w-xs">
-                            <label class="label">
-                                <span class="label-text">Password</span>
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Password</span>
 
                             </label>
 
@@ -107,7 +110,7 @@ const Login = () => {
                             <input
                                 type="password"
                                 placeholder="Password"
-                                class="input input-bordered w-full max-w-xs"
+                                className="input input-bordered w-full max-w-xs"
 
                                 // verification 
                                 {...register("password", {
@@ -122,7 +125,7 @@ const Login = () => {
                                     }
                                 })}
                             />
-                            <label class="label">
+                            <label className="label">
                                 {/* if get error */}
                                 {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
                                 {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
