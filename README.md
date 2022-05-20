@@ -1,3 +1,21 @@
+***
+* react hooks form
+* react router
+* dotenv 
+* React day picker
+	https://react-day-picker.js.org/start
+        npm install react-day-picker date-fns
+* daisyUI
+* tailwind
+* firebase
+* firebase hooks
+* react toastify 
+* npm init -y
+        npm i express cors dotenv mongodb jsonwebtoken
+* 
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
