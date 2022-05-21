@@ -8,6 +8,7 @@ const Dashboard = () => {
             <div class="drawer-content">
                 {/* <!-- Page content here --> */}
                 <h2 className='text-2xl text-purple-500'>Welcome to your Dashboard</h2>
+
                 <Outlet></Outlet>
 
 
