@@ -5,6 +5,7 @@ import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
 import { Link, useNavigate } from 'react-router-dom';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
     //google signing
@@ -24,6 +25,8 @@ const SignUp = () => {
     // update profile
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+    const [token] = useToken(user || gUser);
+
     // for navigation
     const navigate = useNavigate();
 
@@ -32,7 +35,6 @@ const SignUp = () => {
     //ifLoading 
     // if (true || loading || gLoading) { // make short certes 
     if (loading || gLoading || updating) {
-
         return <Loading></Loading>
     }
 
@@ -40,17 +42,17 @@ const SignUp = () => {
         signInError = <p className='text-red-500'><small>{error?.message || gError?.message || updateError.message}</small></p>
     }
 
-    if (user || gUser) {
+    if (token) {
         console.log(user || gUser);
+        navigate('/appointment');
     }
 
     //handle submit form
     const onSubmit = async data => {
-        console.log(data);
+        // console.log(data);
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
         console.log("update done");
-        navigate('/appointment');
     }
 
 
