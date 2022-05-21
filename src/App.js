@@ -11,6 +11,9 @@ import Navbar from './Pages/Shared/Navbar';
 // toastify
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Dashboard from './Pages/Dashboard.js/Dashboard';
+import MyAppointments from './Pages/Dashboard.js/MyAppointments';
+import MyReview from './Pages/Dashboard.js/MyReview';
 
 function App() {
   return (
@@ -24,6 +27,19 @@ function App() {
             <Appointment />
           </RequireAuth>
         }></Route>
+
+        {/* nested route */}
+        <Route path='dashboard' element={
+          <RequireAuth>
+            <Dashboard />
+          </RequireAuth>
+        }>
+          1st main route a index hoy, onno sob a path hobe
+          <Route index element={<MyAppointments></MyAppointments>}></Route>
+          <Route path='review' element={<MyReview />}></Route>
+
+        </Route>
+
         <Route path='login' element={<Login />}></Route>
         <Route path='signup' element={<SignUp />}></Route>
       </Routes>
