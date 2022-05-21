@@ -34,7 +34,7 @@ function App() {
             <Dashboard />
           </RequireAuth>
         }>
-          1st main route a index hoy, onno sob a path hobe
+          {/* 1st main route a index hoy, onno sob a path hobe */}
           <Route index element={<MyAppointments></MyAppointments>}></Route>
           <Route path='review' element={<MyReview />}></Route>
 
