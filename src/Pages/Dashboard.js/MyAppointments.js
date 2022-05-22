@@ -1,5 +1,7 @@
+import { signOut } from 'firebase/auth';
 import React, { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const MyAppointments = () => {
@@ -7,6 +9,8 @@ const MyAppointments = () => {
     const [appointment, setAppointment] = useState([]);
 
     const [user, loading, error] = useAuthState(auth);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
@@ -20,7 +24,11 @@ const MyAppointments = () => {
                 .then(res => {
                     console.log('res', res);
                     if (res.status === 401 || res.status === 403) {
-
+                        signOut(auth);
+                        // for remove jwt
+                        localStorage.removeItem('accessToken');
+                        //when status is 401 & 403
+                        navigate('/');
 
                     }
                     return res.json()
