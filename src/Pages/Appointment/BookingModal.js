@@ -33,7 +33,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
         }
 
         //send data server
-        fetch('http://localhost:5000/booking', {
+        fetch('https://serene-sierra-14270.herokuapp.com/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
