@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 //react hook from
@@ -32,6 +32,14 @@ const SignUp = () => {
 
     let signInError;
 
+    // for jwt 
+    useEffect(() => {
+        if (token) {
+            // console.log(user || gUser);
+            navigate('/appointment');
+        }
+    }, [token, navigate])
+
     //ifLoading 
     // if (true || loading || gLoading) { // make short certes 
     if (loading || gLoading || updating) {
@@ -42,10 +50,7 @@ const SignUp = () => {
         signInError = <p className='text-red-500'><small>{error?.message || gError?.message || updateError.message}</small></p>
     }
 
-    if (token) {
-        console.log(user || gUser);
-        navigate('/appointment');
-    }
+
 
     //handle submit form
     const onSubmit = async data => {
