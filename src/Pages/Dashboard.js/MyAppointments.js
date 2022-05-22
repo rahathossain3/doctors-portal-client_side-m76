@@ -13,12 +13,21 @@ const MyAppointments = () => {
             fetch(`http://localhost:5000/booking?patient=${user.email}`, {
                 method: 'GET',
                 headers: {
-                    // send jwt token 
+                    //send jwt token
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
-                .then(res => res.json())
-                .then(data => setAppointment(data));
+                .then(res => {
+                    console.log('res', res);
+                    if (res.status === 401 || res.status === 403) {
+
+
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    setAppointment(data)
+                });
         }
     }, [user])
 
