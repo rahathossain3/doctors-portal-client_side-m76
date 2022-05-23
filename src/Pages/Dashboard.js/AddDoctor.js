@@ -1,12 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 import Loading from '../Shared/Loading';
 
 const AddDoctor = () => {
 
     //react hook from
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const { data: services, isLoading } = useQuery('services', () => fetch('http://localhost:5000/service').then(res => res.json()))
 
@@ -32,6 +33,7 @@ const AddDoctor = () => {
         const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
         fetch(url, {
             method: 'POST',
+            //send image for get url
             body: formData
         })
             .then(res => res.json())
@@ -45,8 +47,27 @@ const AddDoctor = () => {
                         img: img
                     }
                     //send data your database
+                    fetch('http://localhost:5000/doctor', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        },
+                        body: JSON.stringify(doctor)
+                    })
+                        .then(res => res.json())
+                        .then(inserted => {
+                            if (inserted.insertedId) {
+                                toast.success('doctor added successfully');
+                                reset();
+                            }
+                            else {
+                                toast.error('failed to add a doctor');
+                            }
+                            // console.log('inserted', inserted);
+                        })
                 }
-                console.log('imagebb result', result)
+                // console.log('imagebb result', result)
             })
         // console.log(data);
         // console.log("data", data);
