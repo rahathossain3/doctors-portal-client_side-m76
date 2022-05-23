@@ -10,10 +10,46 @@ const AddDoctor = () => {
 
     const { data: services, isLoading } = useQuery('services', () => fetch('http://localhost:5000/service').then(res => res.json()))
 
+    const imageStorageKey = '6e1daa1bbc98afff1c90ef735b7199b2';
+
+    /**
+     * 3 ways to store image
+     * 1. third party storage // free open public storage is ok for practice project
+     * 2. your own storage in your own server(file system)
+     * 3. database: Mongodb
+     * 
+     * YUP : to validate file : Yup file validation for react form 
+     * 
+     */
+
     //handle submit form
     const onSubmit = async data => {
+        // for image submit
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image)
+        //send image for get url
+        const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    const img = result.data.url;
+                    const doctor = {
+                        name: data.name,
+                        email: data.email,
+                        specialty: data.specialty,
+                        img: img
+                    }
+                    //send data your database
+                }
+                console.log('imagebb result', result)
+            })
         // console.log(data);
-        console.log("data", data);
+        // console.log("data", data);
     }
 
     if (isLoading) {
@@ -98,7 +134,7 @@ const AddDoctor = () => {
                     </label>
 
                     {/* Specialty field ------------------------------- */}
-                    <select {...register('specialty')} class="select w-full max-w-xs">
+                    <select {...register('specialty')} class="select input-bordered w-full max-w-xs">
 
                         {
                             services.map(service => <option
